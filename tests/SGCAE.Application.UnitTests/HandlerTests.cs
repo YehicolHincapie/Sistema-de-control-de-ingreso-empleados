@@ -1,4 +1,4 @@
-﻿using NSubstitute;
+using NSubstitute;
 using SGCAE.Application.Common.Exceptions;
 using SGCAE.Application.Features.AccessControl.Commands.RegisterAccessMovement;
 using SGCAE.Application.Features.AccessControl.Queries.GetAccessHistory;

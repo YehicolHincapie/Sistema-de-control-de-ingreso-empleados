@@ -87,3 +87,4 @@ public class AccessLogTests
         Assert.Contains("inhabilitado", log.RejectionReason);
     }
 }
+

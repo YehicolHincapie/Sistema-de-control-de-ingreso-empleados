@@ -205,7 +205,8 @@ dotnet run --project src/SGCAE.Api/SGCAE.Api.csproj
 ```
 
 Una vez iniciada la API:
-- **Documentación Interactiva (Scalar OpenAPI)**: `http://localhost:5158/scalar/v1`
+- **Swagger UI (Documentación Interactiva)**: `http://localhost:5158/swagger`
+- **Scalar UI (Documentación Alternativa)**: `http://localhost:5158/scalar/v1`
 - **Especificación OpenAPI JSON**: `http://localhost:5158/openapi/v1.json`
 
 ---
@@ -307,3 +308,4 @@ El archivo [`src/SGCAE.Api/SGCAE.Api.http`](src/SGCAE.Api/SGCAE.Api.http) incluy
   "hasNextPage": true
 }
 ```
+

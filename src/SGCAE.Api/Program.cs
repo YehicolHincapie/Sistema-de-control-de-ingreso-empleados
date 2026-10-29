@@ -39,16 +39,24 @@ var app = builder.Build();
 // 5. Inicialización automática de Base de Datos y Datos Semilla
 await DatabaseInitializer.InitializeDatabaseAsync(app.Services);
 
-// 6. Pipeline HTTP
+// 6. Pipeline HTTP y Documentación Interactiva (Swagger UI + Scalar)
 app.UseExceptionHandler();
 
 app.MapOpenApi();
+
+app.UseSwaggerUI(options =>
+{
+    options.SwaggerEndpoint("/openapi/v1.json", "SGCAE API v1");
+    options.RoutePrefix = "swagger";
+    options.DocumentTitle = "SGCAE API - Swagger UI";
+});
+
 app.MapScalarApiReference(options =>
 {
     options.WithTitle("SGCAE API - Documentación Interactiva");
 });
 
-app.MapGet("/", () => Results.Redirect("/scalar/v1"))
+app.MapGet("/", () => Results.Redirect("/swagger"))
     .ExcludeFromDescription();
 
 app.UseHttpsRedirection();
