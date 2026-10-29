@@ -1,6 +1,184 @@
-@SGCAE.Api_HostAddress = http://localhost:5171
+@HostAddress = http://localhost:5158
 
-GET {{SGCAE.Api_HostAddress}}/weatherforecast/
+### =========================================================================
+### RF-01: GESTIÓN DE EMPLEADOS
+### =========================================================================
+
+### 1.1 Consultar todos los empleados
+GET {{HostAddress}}/api/v1/employees
 Accept: application/json
 
 ###
+
+### 1.2 Consultar solo empleados activos
+GET {{HostAddress}}/api/v1/employees?status=Active
+Accept: application/json
+
+###
+
+### 1.3 Registrar un nuevo empleado
+POST {{HostAddress}}/api/v1/employees
+Content-Type: application/json
+
+{
+  "identificationNumber": "1044556677",
+  "firstName": "María Fernanda",
+  "lastName": "López Castro",
+  "email": "maria.lopez@logistica-sgcae.com",
+  "position": "Supervisora de Inventarios",
+  "department": "Almacenamiento"
+}
+
+###
+
+### 1.4 Actualizar información de un empleado (Reemplazar {employeeId} con un GUID real)
+@employeeId = 00000000-0000-0000-0000-000000000000
+PUT {{HostAddress}}/api/v1/employees/{{employeeId}}
+Content-Type: application/json
+
+{
+  "firstName": "María Fernanda",
+  "lastName": "López Castro",
+  "email": "maria.lopez@logistica-sgcae.com",
+  "position": "Jefe de Bodega Nacional",
+  "department": "Logística y Almacenamiento"
+}
+
+###
+
+### 1.5 Desactivar vínculo laboral de un empleado
+PATCH {{HostAddress}}/api/v1/employees/{{employeeId}}/deactivate
+Content-Type: application/json
+
+### =========================================================================
+### RF-02: GESTIÓN DE CREDENCIALES
+### =========================================================================
+
+### 2.1 Consultar estado de credencial semilla vigente
+GET {{HostAddress}}/api/v1/credentials/CRD-2026-0001
+Accept: application/json
+
+###
+
+### 2.2 Asignar nueva credencial a un empleado activo
+POST {{HostAddress}}/api/v1/credentials/assign
+Content-Type: application/json
+
+{
+  "employeeId": "{{employeeId}}",
+  "code": "CRD-2026-0099"
+}
+
+###
+
+### 2.3 Bloquear temporalmente una credencial
+PATCH {{HostAddress}}/api/v1/credentials/CRD-2026-0099/block
+Content-Type: application/json
+
+{
+  "reason": "Reporte temporal de extravío en planta"
+}
+
+###
+
+### 2.4 Desbloquear credencial
+PATCH {{HostAddress}}/api/v1/credentials/CRD-2026-0099/unblock
+Content-Type: application/json
+
+###
+
+### 2.5 Revocar definitivamente una credencial
+PATCH {{HostAddress}}/api/v1/credentials/CRD-2026-0099/revoke
+Content-Type: application/json
+
+{
+  "reason": "Finalización de contrato y entrega de carnet"
+}
+
+### =========================================================================
+### RF-06: ADMINISTRACIÓN DE PUNTOS DE ACCESO
+### =========================================================================
+
+### 6.1 Consultar todos los puntos de acceso físicos
+GET {{HostAddress}}/api/v1/access-points
+Accept: application/json
+
+###
+
+### 6.2 Consultar únicamente puntos de acceso habilitados
+GET {{HostAddress}}/api/v1/access-points?isEnabled=true
+Accept: application/json
+
+###
+
+### 6.3 Registrar un nuevo punto de acceso físico
+POST {{HostAddress}}/api/v1/access-points
+Content-Type: application/json
+
+{
+  "code": "AP-LAB-01",
+  "name": "Laboratorio de Control de Calidad",
+  "area": "Planta Principal - Piso 2",
+  "description": "Puerta esclusa con lector RFID",
+  "isRestrictedArea": true,
+  "isEnabled": true
+}
+
+### =========================================================================
+### RF-03: REGISTRO DE ENTRADAS Y SALIDAS (AUTORIZADOS Y RECHAZADOS)
+### =========================================================================
+
+### 3.1 Registrar movimiento de Entrada o Salida (Reemplazar accessPointId con GUID de Recepción o Bodega)
+@accessPointId = 00000000-0000-0000-0000-000000000000
+POST {{HostAddress}}/api/v1/access-control/movements
+Content-Type: application/json
+
+{
+  "credentialCode": "CRD-2026-0001",
+  "accessPointId": "{{accessPointId}}",
+  "movementType": "Entry"
+}
+
+###
+
+### 3.2 Intento de acceso con credencial de empleado INACTIVO (Debe registrarse como Rejected)
+POST {{HostAddress}}/api/v1/access-control/movements
+Content-Type: application/json
+
+{
+  "credentialCode": "CRD-2026-0003",
+  "accessPointId": "{{accessPointId}}",
+  "movementType": "Entry"
+}
+
+###
+
+### 3.3 Intento de acceso con credencial INEXISTENTE (Debe registrarse como Rejected)
+POST {{HostAddress}}/api/v1/access-control/movements
+Content-Type: application/json
+
+{
+  "credentialCode": "CRD-FALSA-9999",
+  "accessPointId": "{{accessPointId}}",
+  "movementType": "Entry"
+}
+
+### =========================================================================
+### RF-04: CONSULTA PAGINADA DEL HISTORIAL DE ACCESOS
+### =========================================================================
+
+### 4.1 Consultar historial paginado general (Página 1, 10 registros)
+GET {{HostAddress}}/api/v1/access-control/history?pageNumber=1&pageSize=10
+Accept: application/json
+
+###
+
+### 4.2 Consultar historial filtrando solo accesos RECHAZADOS
+GET {{HostAddress}}/api/v1/access-control/history?validationResult=Rejected&pageNumber=1&pageSize=10
+Accept: application/json
+
+###
+
+### 4.3 Consultar historial filtrando solo accesos AUTORIZADOS
+GET {{HostAddress}}/api/v1/access-control/history?validationResult=Authorized&pageNumber=1&pageSize=10
+Accept: application/json

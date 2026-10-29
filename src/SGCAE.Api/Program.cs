@@ -1,23 +1,58 @@
+using System.Text.Json.Serialization;
+using Scalar.AspNetCore;
+using SGCAE.Api.Middleware;
+using SGCAE.Application;
+using SGCAE.Infrastructure;
+using SGCAE.Infrastructure.Persistence;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// 1. Registro de capas Clean Architecture (Application & Infrastructure)
+builder.Services.AddApplication();
+builder.Services.AddInfrastructure(builder.Configuration);
 
-builder.Services.AddControllers();
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
+// 2. Controladores REST y serialización JSON
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+    });
+
+// 3. Manejo global de excepciones (RFC 7807 ProblemDetails)
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+builder.Services.AddProblemDetails();
+
+// 4. Documentación OpenAPI (.NET 10)
+builder.Services.AddOpenApi(options =>
+{
+    options.AddDocumentTransformer((document, _, _) =>
+    {
+        document.Info.Title = "SGCAE API - Sistema de Gestión y Control de Acceso de Empleados";
+        document.Info.Version = "v1";
+        document.Info.Description = "Backend empresarial con Clean Architecture, DDD, CQRS y EF Core sobre SQL Server.";
+        return Task.CompletedTask;
+    });
+});
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+// 5. Inicialización automática de Base de Datos y Datos Semilla
+await DatabaseInitializer.InitializeDatabaseAsync(app.Services);
+
+// 6. Pipeline HTTP
+app.UseExceptionHandler();
+
+app.MapOpenApi();
+app.MapScalarApiReference(options =>
 {
-    app.MapOpenApi();
-}
+    options.WithTitle("SGCAE API - Documentación Interactiva");
+});
+
+app.MapGet("/", () => Results.Redirect("/scalar/v1"))
+    .ExcludeFromDescription();
 
 app.UseHttpsRedirection();
-
 app.UseAuthorization();
-
 app.MapControllers();
 
 app.Run();
