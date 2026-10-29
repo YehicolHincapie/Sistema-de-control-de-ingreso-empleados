@@ -21,3 +21,4 @@ public sealed class GetCredentialsByEmployeeQueryHandler : IQueryHandler<GetCred
         return credentials.Select(c => c.ToDto()).ToList();
     }
 }
+

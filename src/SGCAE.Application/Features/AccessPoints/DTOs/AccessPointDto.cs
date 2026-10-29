@@ -27,3 +27,4 @@ public static class AccessPointMappingExtensions
             accessPoint.CreatedAtUtc,
             accessPoint.UpdatedAtUtc);
 }
+

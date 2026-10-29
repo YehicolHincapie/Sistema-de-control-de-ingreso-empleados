@@ -42,3 +42,4 @@ public sealed class UnblockCredentialCommandHandler : ICommandHandler<UnblockCre
         return credential.ToDto();
     }
 }
+

@@ -126,3 +126,4 @@ public sealed class Employee : AggregateRoot
             throw new DomainException($"El campo '{fieldName}' no puede exceder los {maxLength} caracteres.");
     }
 }
+

@@ -68,3 +68,4 @@ public sealed class CreateAccessPointCommandHandler : ICommandHandler<CreateAcce
         return accessPoint.ToDto();
     }
 }
+

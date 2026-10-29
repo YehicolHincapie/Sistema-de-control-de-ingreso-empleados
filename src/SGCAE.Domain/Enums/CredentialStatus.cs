@@ -9,3 +9,4 @@ public enum CredentialStatus
     Blocked = 2,
     Revoked = 3
 }
+

@@ -156,3 +156,4 @@ public sealed class AccessLog : AggregateRoot
             null);
     }
 }
+

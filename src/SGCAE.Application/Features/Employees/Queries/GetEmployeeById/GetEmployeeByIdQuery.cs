@@ -24,3 +24,4 @@ public sealed class GetEmployeeByIdQueryHandler : IQueryHandler<GetEmployeeByIdQ
         return employee.ToDto();
     }
 }
+

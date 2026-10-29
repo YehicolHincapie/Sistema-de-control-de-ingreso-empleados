@@ -43,3 +43,4 @@ public sealed partial class EmailAddress : ValueObject
     [GeneratedRegex(@"^[^@\s]+@[^@\s]+\.[^@\s]+$")]
     private static partial Regex EmailRegex();
 }
+

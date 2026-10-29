@@ -62,3 +62,4 @@ public sealed class AssignCredentialCommandHandler : ICommandHandler<AssignCrede
         return credential.ToDto(employee);
     }
 }
+

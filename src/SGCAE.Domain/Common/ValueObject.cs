@@ -33,3 +33,4 @@ public abstract class ValueObject
 
     public static bool operator !=(ValueObject? left, ValueObject? right) => !(left == right);
 }
+

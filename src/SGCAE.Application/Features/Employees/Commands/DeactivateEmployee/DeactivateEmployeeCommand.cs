@@ -31,3 +31,4 @@ public sealed class DeactivateEmployeeCommandHandler : ICommandHandler<Deactivat
         return employee.ToDto();
     }
 }
+

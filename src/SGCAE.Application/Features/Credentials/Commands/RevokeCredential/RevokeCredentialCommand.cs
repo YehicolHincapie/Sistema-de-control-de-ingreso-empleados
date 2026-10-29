@@ -47,3 +47,4 @@ public sealed class RevokeCredentialCommandHandler : ICommandHandler<RevokeCrede
         return credential.ToDto();
     }
 }
+

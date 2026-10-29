@@ -46,3 +46,4 @@ public sealed partial class IdentificationNumber : ValueObject
     [GeneratedRegex(@"^[A-Z0-9\-]+$")]
     private static partial Regex ValidIdentificationRegex();
 }
+

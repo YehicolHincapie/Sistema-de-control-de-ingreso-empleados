@@ -11,3 +11,4 @@ public interface IAccessPointRepository
     Task AddAsync(AccessPoint accessPoint, CancellationToken cancellationToken = default);
     void Update(AccessPoint accessPoint);
 }
+

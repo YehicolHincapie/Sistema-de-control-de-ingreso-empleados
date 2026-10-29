@@ -103,3 +103,4 @@ public sealed class AccessPoint : AggregateRoot
         UpdatedAtUtc = DateTime.UtcNow;
     }
 }
+

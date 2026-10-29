@@ -36,3 +36,4 @@ public static class EmployeeMappingExtensions
             employee.UpdatedAtUtc,
             employee.DeactivatedAtUtc);
 }
+

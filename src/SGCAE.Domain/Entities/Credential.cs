@@ -80,3 +80,4 @@ public sealed class Credential : AggregateRoot
 
     public bool IsUsable() => Status == CredentialStatus.Active;
 }
+

@@ -47,3 +47,4 @@ public sealed class BlockCredentialCommandHandler : ICommandHandler<BlockCredent
         return credential.ToDto();
     }
 }
+

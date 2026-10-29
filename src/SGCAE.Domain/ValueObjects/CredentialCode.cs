@@ -46,3 +46,4 @@ public sealed partial class CredentialCode : ValueObject
     [GeneratedRegex(@"^[A-Z0-9\-]+$")]
     private static partial Regex ValidCodeRegex();
 }
+

@@ -51,3 +51,4 @@ public abstract class Entity
 
     public override int GetHashCode() => (GetType().ToString() + Id).GetHashCode();
 }
+

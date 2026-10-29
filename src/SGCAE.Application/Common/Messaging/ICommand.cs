@@ -10,3 +10,4 @@ public interface ICommandHandler<in TCommand, TResponse> : IRequestHandler<TComm
     where TCommand : ICommand<TResponse>
 {
 }
+

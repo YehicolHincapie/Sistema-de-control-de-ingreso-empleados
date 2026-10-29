@@ -64,3 +64,4 @@ public sealed class GetAccessHistoryQueryHandler : IQueryHandler<GetAccessHistor
             pagedLogs.PageSize);
     }
 }
+

@@ -10,3 +10,4 @@ public sealed class ApplicationValidationException : Exception
         Errors = errors;
     }
 }
+

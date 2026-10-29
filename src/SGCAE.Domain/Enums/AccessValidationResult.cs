@@ -8,3 +8,4 @@ public enum AccessValidationResult
     Authorized = 1,
     Rejected = 2
 }
+

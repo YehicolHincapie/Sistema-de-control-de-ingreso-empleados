@@ -9,3 +9,4 @@ public enum EmploymentStatus
     Inactive = 2,
     Suspended = 3
 }
+

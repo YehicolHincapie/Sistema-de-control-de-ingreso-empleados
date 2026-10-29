@@ -10,3 +10,4 @@ public interface IQueryHandler<in TQuery, TResponse> : IRequestHandler<TQuery, T
     where TQuery : IQuery<TResponse>
 {
 }
+

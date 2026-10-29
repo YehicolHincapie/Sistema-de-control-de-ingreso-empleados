@@ -13,3 +13,4 @@ public interface IEmployeeRepository
     Task AddAsync(Employee employee, CancellationToken cancellationToken = default);
     void Update(Employee employee);
 }
+

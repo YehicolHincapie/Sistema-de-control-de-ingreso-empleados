@@ -80,3 +80,4 @@ public sealed class RegisterAccessMovementCommandHandler : ICommandHandler<Regis
         return accessLog.ToDto(employee, accessPoint);
     }
 }
+

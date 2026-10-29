@@ -12,3 +12,4 @@ public interface ICredentialRepository
     Task AddAsync(Credential credential, CancellationToken cancellationToken = default);
     void Update(Credential credential);
 }
+

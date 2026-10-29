@@ -18,3 +18,4 @@ public interface IAccessLogRepository
         int pageSize,
         CancellationToken cancellationToken = default);
 }
+

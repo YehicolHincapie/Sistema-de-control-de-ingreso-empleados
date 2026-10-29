@@ -21,3 +21,4 @@ public sealed class GetAccessPointsQueryHandler : IQueryHandler<GetAccessPointsQ
         return accessPoints.Select(ap => ap.ToDto()).ToList();
     }
 }
+

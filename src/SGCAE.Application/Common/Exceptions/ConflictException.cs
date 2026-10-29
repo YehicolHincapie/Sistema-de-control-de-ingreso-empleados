@@ -6,3 +6,4 @@ public sealed class ConflictException : Exception
     {
     }
 }
+

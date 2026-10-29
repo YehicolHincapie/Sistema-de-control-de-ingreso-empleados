@@ -25,3 +25,4 @@ public sealed class GetCredentialByCodeQueryHandler : IQueryHandler<GetCredentia
         return credential.ToDto();
     }
 }
+

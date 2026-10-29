@@ -36,3 +36,4 @@ public sealed class ChangeAccessPointStatusCommandHandler : ICommandHandler<Chan
         return accessPoint.ToDto();
     }
 }
+
