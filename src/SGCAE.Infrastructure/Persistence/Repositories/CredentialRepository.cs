@@ -72,6 +72,13 @@ public sealed class CredentialRepository : ICredentialRepository
                 cancellationToken);
     }
 
+    public async Task<IReadOnlyList<Credential>> GetNonRevokedByEmployeeIdAsync(Guid employeeId, CancellationToken cancellationToken = default)
+    {
+        return await _context.Credentials
+            .Where(c => c.EmployeeId == employeeId && c.Status != CredentialStatus.Revoked)
+            .ToListAsync(cancellationToken);
+    }
+
     public async Task AddAsync(Credential credential, CancellationToken cancellationToken = default)
     {
         await _context.Credentials.AddAsync(credential, cancellationToken);

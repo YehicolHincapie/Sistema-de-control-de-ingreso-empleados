@@ -9,6 +9,8 @@ public interface ICredentialRepository
     Task<bool> ExistsByCodeAsync(string code, CancellationToken cancellationToken = default);
     Task<IReadOnlyList<Credential>> GetByEmployeeIdAsync(Guid employeeId, CancellationToken cancellationToken = default);
     Task<Credential?> GetActiveByEmployeeIdAsync(Guid employeeId, CancellationToken cancellationToken = default);
+    /// <summary>Credenciales no revocadas (vigentes o bloqueadas) del empleado, con seguimiento de cambios.</summary>
+    Task<IReadOnlyList<Credential>> GetNonRevokedByEmployeeIdAsync(Guid employeeId, CancellationToken cancellationToken = default);
     Task AddAsync(Credential credential, CancellationToken cancellationToken = default);
     void Update(Credential credential);
 }

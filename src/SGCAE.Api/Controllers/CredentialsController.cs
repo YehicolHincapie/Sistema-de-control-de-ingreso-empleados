@@ -100,3 +100,4 @@ public sealed class CredentialsController : ControllerBase
 }
 
 public sealed record CredentialActionReasonRequest(string? Reason);
+

@@ -68,3 +68,4 @@ public sealed class AccessPointsController : ControllerBase
 }
 
 public sealed record ChangeAccessPointStatusRequest(bool IsEnabled);
+

@@ -2,6 +2,7 @@ using FluentValidation;
 using SGCAE.Application.Common.Exceptions;
 using SGCAE.Application.Common.Messaging;
 using SGCAE.Application.Features.Credentials.DTOs;
+using SGCAE.Domain.Common;
 using SGCAE.Domain.Entities;
 using SGCAE.Domain.Repositories;
 
@@ -45,6 +46,9 @@ public sealed class AssignCredentialCommandHandler : ICommandHandler<AssignCrede
     {
         var employee = await _employeeRepository.GetByIdAsync(request.EmployeeId, cancellationToken)
             ?? throw new NotFoundException($"No se encontró el empleado con ID '{request.EmployeeId}'.");
+
+        if (!employee.IsActive())
+            throw new DomainException("No se puede asignar una credencial a un empleado cuyo vínculo laboral está inactivo.");
 
         var normalizedCode = request.Code.Trim().ToUpperInvariant();
         if (await _credentialRepository.ExistsByCodeAsync(normalizedCode, cancellationToken))

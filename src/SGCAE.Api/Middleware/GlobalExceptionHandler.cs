@@ -49,3 +49,4 @@ public sealed class GlobalExceptionHandler : IExceptionHandler
         return true;
     }
 }
+
